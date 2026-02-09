@@ -162,14 +162,16 @@
             gap: 15px;
         }
 
-      .carousel-container {
-    display: flex;
-    gap: 25px;
-    overflow-x: auto;        /* PERMITE VOLTAR */
-    scroll-behavior: smooth;
-    padding: 15px 5px;
-    width: 100%;
-}
+        .carousel-container {
+            display: flex;
+            gap: 25px;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding: 15px 5px;
+            width: 100%;
+
+            
+        }
 
         .nav-btn {
             background: var(--bg-card);
@@ -559,21 +561,6 @@
             .card-img-wrapper { height: 280px; } 
             #pizza-container .card-img-wrapper { height: 350px; } 
         }
-
-      body {
-    overflow-x: hidden;
-    position: relative;
-}
-
-#main-menu,
-.container,
-section,
-.carousel-wrapper,
-.carousel-container {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-        
     </style>
 </head>
 <body>
@@ -988,9 +975,3 @@ section,
     </script>
 </body>
 </html>
-
-
-
-
-
-
