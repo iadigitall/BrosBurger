@@ -171,6 +171,16 @@
     width: 100%;
 }
 
+        /* ESCONDER BARRA DE ROLAGEM DOS CARROSSEIS */
+.carousel-container {
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE/Edge antigo */
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none;                /* Chrome, Safari, Edge */
+}
+
         .nav-btn {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -973,4 +983,5 @@
     </script>
 </body>
 </html>
+
 
