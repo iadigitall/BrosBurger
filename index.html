@@ -304,12 +304,12 @@
 
         .testimonial-card {
             background: var(--bg-card);
-            padding: 12px; /* Super compacto */
+            padding: 12px; 
             border-radius: 12px;
             border: 1px solid var(--border);
             transition: var(--transition);
             position: relative;
-            min-width: calc(16.66% - 13px); /* Mostra 6 por vez em desktop */
+            min-width: calc(16.66% - 13px); 
             aspect-ratio: 1 / 1; 
             flex-shrink: 0;
             display: flex;
@@ -344,7 +344,7 @@
             line-height: 1.3; 
             font-style: italic;
             display: -webkit-box;
-            -webkit-line-clamp: 2; /* LIMITADO A DUAS LINHAS COMO SOLICITADO */
+            -webkit-line-clamp: 2; 
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -445,7 +445,7 @@
         .checkout-card { background: var(--bg-card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); }
         .form-group input { width: 100%; padding: 15px; background: #080808; border: 1px solid #222; color: white; border-radius: 10px; margin-top: 8px; }
 
-        /* --- NOVO: MODAL PIX E LOADING --- */
+        /* --- MODAL PIX E LOADING --- */
         #pix-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -468,7 +468,6 @@
             box-shadow: 0 20px 60px rgba(230, 30, 42, 0.2);
         }
 
-        /* Animação Carregando */
         .loading-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .spinner {
             width: 60px; height: 60px;
@@ -491,6 +490,7 @@
             font-size: 0.9rem;
             margin: 15px 0;
             position: relative;
+            text-align: center;
         }
         .order-summary-pix {
             background: rgba(255,255,255,0.03);
@@ -562,6 +562,8 @@
                 <div class="countdown-timer" id="pix-timer">05:00</div>
                 <p style="text-align: center; font-size: 0.75rem; color: var(--text-dim);">O pedido será cancelado se o pagamento não for identificado em 5 minutos.</p>
                 
+                <p style="text-align: center; margin-top: 15px; font-weight: 600; color: #fff;">Instrução: Coloque a chave acima no seu banco e finalize o pagamento para concluir o pedido.</p>
+
                 <button class="btn-finalize" style="margin-top: 25px;" onclick="location.reload()">
                     CONCLUÍDO / VOLTAR AO INÍCIO
                 </button>
@@ -887,7 +889,6 @@
             const totalItems = cards.length;
             
             setInterval(() => {
-                // Ajustado para mostrar 6 em desktop, 3 em tablet, 2 em mobile
                 const itemsToShow = window.innerWidth > 1024 ? 6 : (window.innerWidth > 768 ? 3 : 2);
                 testimonialIndex++;
                 
@@ -895,7 +896,7 @@
                     testimonialIndex = 0;
                 }
                 
-                const cardWidth = cards[0].offsetWidth + 15; // width + gap
+                const cardWidth = cards[0].offsetWidth + 15;
                 track.style.transform = `translateX(-${testimonialIndex * cardWidth}px)`;
             }, 4000); 
         }
@@ -1008,13 +1009,6 @@
             }, 1000);
         }
 
-        function generateRandomPix() {
-            const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            let key = '00020126580014BR.GOV.BCB.PIX0136';
-            for (let i = 0; i < 32; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
-            return key;
-        }
-
         function irPagamento() {
             const name = document.getElementById('receiver-name').value;
             const phone = document.getElementById('receiver-phone').value;
@@ -1039,7 +1033,9 @@
                 document.getElementById('pix-client-phone').innerText = phone;
                 document.getElementById('pix-client-address').innerText = `${address}, nº ${number} ${complement ? '('+complement+')' : ''}`;
                 document.getElementById('pix-final-value').innerText = document.getElementById('final-total').innerText;
-                document.getElementById('pix-key-value').innerText = generateRandomPix();
+                
+                // CHAVE PIX ESPECÍFICA SOLICITADA
+                document.getElementById('pix-key-value').innerText = "eb98bf30-73c9-4357-9691-cd39bbfe4c91";
 
                 const itemsList = document.getElementById('pix-items-list');
                 itemsList.innerHTML = '';
