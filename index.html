@@ -91,8 +91,6 @@
             color: var(--primary-red);
         }
 
- 
-
         /* --- NOTIFICAÇÃO --- */
         #notification-box {
             position: fixed;
@@ -169,8 +167,6 @@
             scroll-behavior: smooth;
             padding: 15px 5px;
             width: 100%;
-
-            
         }
 
         .nav-btn {
@@ -216,15 +212,12 @@
 
         .card-img-wrapper {
             overflow: hidden;
-            height: 300px; /* Altura padrão para hambúrgueres e outros */
+            height: 300px;
             position: relative;
             background: #000;
         }
 
-        /* AJUSTE ESPECÍFICO PARA PIZZAS - ZOOM AUMENTADO */
-        #pizza-container .card-img-wrapper {
-            height: 380px; 
-        }
+        #pizza-container .card-img-wrapper { height: 380px; }
 
         .card-img {
             width: 100%;
@@ -234,19 +227,9 @@
             transition: transform 0.6s ease;
         }
 
-        /* ZOOM ADICIONAL NAS PIZZAS PARA ESCONDER SÍMBOLOS NOS CANTOS */
-        #pizza-container .card-img {
-            transform: scale(1.15); 
-        }
-
-        .card:hover .card-img {
-            transform: scale(1.08);
-        }
-
-        /* AJUSTE DE HOVER ESPECÍFICO PARA PIZZAS */
-        #pizza-container .card:hover .card-img {
-            transform: scale(1.22); 
-        }
+        #pizza-container .card-img { transform: scale(1.15); }
+        .card:hover .card-img { transform: scale(1.08); }
+        #pizza-container .card:hover .card-img { transform: scale(1.22); }
 
         .card-body {
             padding: 8px 15px; 
@@ -306,20 +289,33 @@
             transform: translateY(-2px);
         }
 
-        /* --- DEPOIMENTOS --- */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+        /* --- DEPOIMENTOS (SUPER MINI QUADRADOS) --- */
+        .testimonials-slider-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 10px 0 40px;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 15px;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         .testimonial-card {
             background: var(--bg-card);
-            padding: 35px;
-            border-radius: 20px;
+            padding: 12px; /* Super compacto */
+            border-radius: 12px;
             border: 1px solid var(--border);
             transition: var(--transition);
             position: relative;
+            min-width: calc(16.66% - 13px); /* Mostra 6 por vez em desktop */
+            aspect-ratio: 1 / 1; 
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
         }
 
         .testimonial-card::after {
@@ -327,86 +323,61 @@
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 2rem;
-            color: rgba(230, 30, 42, 0.1);
+            top: 8px;
+            right: 12px;
+            font-size: 0.8rem;
+            color: rgba(230, 30, 42, 0.08);
         }
 
         .testimonial-card:hover {
             border-color: var(--primary-red);
-            transform: translateY(-5px);
+            transform: scale(1.05);
+            background: var(--bg-card-hover);
         }
 
-        .stars {
-            color: var(--primary-red);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+        .stars { color: var(--primary-red); font-size: 0.6rem; margin-bottom: 6px; }
+        
+        .testimonial-text { 
+            color: var(--text-dim); 
+            font-size: 0.7rem; 
+            margin-bottom: 8px; 
+            line-height: 1.3; 
+            font-style: italic;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* LIMITADO A DUAS LINHAS COMO SOLICITADO */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-
-        .testimonial-text {
-            color: var(--text-dim);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            color: #fff;
-            font-size: 1rem;
-        }
+        
+        .testimonial-author { font-weight: 700; color: #fff; font-size: 0.75rem; }
 
         /* --- FAQ --- */
-    /* --- FAQ --- */
-.faq-container {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.faq-item {
-    background: var(--bg-card);
-    margin-bottom: 15px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    transition: var(--transition);
-    overflow: hidden;
-}
-
-.faq-question {
-    width: 100%;
-    padding: 20px 25px;
-    background: none;
-    border: none;
-    color: white;
-    text-align: left;
-    font-weight: 600;
-    font-size: 1.05rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* FECHADO */
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 25px;
-    color: var(--text-dim);
-    transition: max-height 0.4s ease, padding 0.4s ease;
-}
-
-/* ABERTO */
-.faq-item.active {
-    border-color: var(--primary-red);
-}
-
-.faq-item.active .faq-answer {
-    max-height: 200px;
-    padding: 0 25px 25px 25px;
-}
-
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-item {
+            background: var(--bg-card);
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        .faq-question {
+            width: 100%;
+            padding: 20px 25px;
+            background: none;
+            border: none;
+            color: white;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: var(--text-dim); transition: max-height 0.4s ease, padding 0.4s ease; font-size: 0.95rem; }
+        .faq-item.active { border-color: var(--primary-red); }
+        .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 25px 25px; }
 
         /* --- CARRINHO FIXO --- */
         #cart-toggle {
@@ -460,96 +431,87 @@
             border-left: 1px solid var(--border);
         }
 
-        .cart-overlay.active {
-            right: 0;
-        }
-
-        .cart-header {
-            padding: 30px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-items-list {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 30px;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .qty-btn {
-            background: #222;
-            border: 1px solid #333;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .cart-footer {
-            padding: 30px;
-            background: #0a0a0a;
-            border-top: 1px solid var(--border);
-        }
-
-        .btn-finalize {
-            width: 100%;
-            background: var(--primary-red);
-            color: white;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
+        .cart-overlay.active { right: 0; }
+        .cart-header { padding: 30px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .cart-items-list { flex-grow: 1; overflow-y: auto; padding: 30px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+        .qty-btn { background: #222; border: 1px solid #333; color: white; width: 30px; height: 30px; border-radius: 6px; cursor: pointer; }
+        .cart-footer { padding: 30px; background: #0a0a0a; border-top: 1px solid var(--border); }
+        .btn-finalize { width: 100%; background: var(--primary-red); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; text-transform: uppercase; }
 
         /* --- CHECKOUT --- */
-        #checkout-page {
+        #checkout-page { display: none; padding: 80px 0; animation: fadeIn 0.6s ease; }
+        .checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; }
+        .checkout-card { background: var(--bg-card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); }
+        .form-group input { width: 100%; padding: 15px; background: #080808; border: 1px solid #222; color: white; border-radius: 10px; margin-top: 8px; }
+
+        /* --- NOVO: MODAL PIX E LOADING --- */
+        #pix-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 5000;
             display: none;
-            padding: 80px 0;
-            animation: fadeIn 0.6s ease;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
         }
 
-        .checkout-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 50px;
-        }
-
-        .checkout-card {
+        .payment-modal {
             background: var(--bg-card);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 30px;
+            border: 1px solid var(--primary-red);
             padding: 40px;
-            border-radius: 24px;
-            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(230, 30, 42, 0.2);
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 15px;
+        /* Animação Carregando */
+        .loading-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .spinner {
+            width: 60px; height: 60px;
+            border: 5px solid rgba(255,255,255,0.1);
+            border-top: 5px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .pix-content { display: none; text-align: left; }
+        .pix-header { text-align: center; margin-bottom: 25px; }
+        .pix-key-box {
             background: #080808;
-            border: 1px solid #222;
-            color: white;
+            padding: 15px;
+            border: 1px dashed var(--primary-red);
             border-radius: 10px;
-            margin-top: 8px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            position: relative;
+        }
+        .order-summary-pix {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .countdown-timer {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            text-align: center;
+            margin: 15px 0;
         }
 
         /* --- RESPONSIVIDADE --- */
         @media (max-width: 1024px) {
             .card { min-width: calc(50% - 13px); }
             .checkout-grid { grid-template-columns: 1fr; }
+            .testimonial-card { min-width: calc(33.33% - 10px); }
         }
 
         @media (max-width: 768px) {
@@ -558,6 +520,7 @@
             .nav-btn { display: none; }
             .carousel-container { overflow-x: auto; }
             .card { min-width: 80%; }
+            .testimonial-card { min-width: calc(45% - 8px); }
             .card-img-wrapper { height: 280px; } 
             #pizza-container .card-img-wrapper { height: 350px; } 
         }
@@ -567,6 +530,45 @@
 
     <div id="notification-box"></div>
 
+    <!-- MODAL DE PAGAMENTO PIX -->
+    <div id="pix-modal-overlay">
+        <div class="payment-modal">
+            <!-- TELA DE LOADING -->
+            <div id="pix-loading" class="loading-container">
+                <div class="spinner"></div>
+                <h3 style="letter-spacing: 2px;">PROCESSANDO PEDIDO...</h3>
+                <p style="color: var(--text-dim);">Estamos gerando sua chave de pagamento segura.</p>
+            </div>
+
+            <!-- TELA DA CHAVE PIX -->
+            <div id="pix-main-content" class="pix-content">
+                <div class="pix-header">
+                    <i class="fas fa-qrcode" style="font-size: 3rem; color: var(--primary-red); margin-bottom: 10px;"></i>
+                    <h2 style="font-size: 1.5rem;">PAGAMENTO PIX</h2>
+                </div>
+                
+                <div class="order-summary-pix">
+                    <p><strong>CLIENTE:</strong> <span id="pix-client-name"></span></p>
+                    <p><strong>CONTACTO:</strong> <span id="pix-client-phone"></span></p>
+                    <p><strong>ENTREGA:</strong> <span id="pix-client-address"></span></p>
+                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 10px 0;">
+                    <div id="pix-items-list" style="margin-bottom: 10px;"></div>
+                    <p style="font-size: 1.2rem; font-weight: 800;">TOTAL: <span id="pix-final-value" style="color: var(--primary-red);"></span></p>
+                </div>
+
+                <p style="font-size: 0.85rem; color: var(--text-dim);">Copie a chave abaixo e pague no app do seu banco:</p>
+                <div class="pix-key-box" id="pix-key-value"></div>
+                
+                <div class="countdown-timer" id="pix-timer">05:00</div>
+                <p style="text-align: center; font-size: 0.75rem; color: var(--text-dim);">O pedido será cancelado se o pagamento não for identificado em 5 minutos.</p>
+                
+                <button class="btn-finalize" style="margin-top: 25px;" onclick="location.reload()">
+                    CONCLUÍDO / VOLTAR AO INÍCIO
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div id="main-menu">
         <header>
             <div class="container header-content">
@@ -574,11 +576,9 @@
                     <i class="fas fa-fire-alt logo-icon"></i>
                     <div class="logo-text">BRO'S <span>PREMIUM</span></div>
                 </div>
-
             </div>
         </header>
 
-        <!-- BANNER COM A IMAGEM ENVIADA -->
         <div class="hero-banner">
             <img src="capa.png" alt="Bro's Burger & Pizza Banner" onerror="this.src='capa.png'">
         </div>
@@ -621,81 +621,94 @@
             </section>
 
             <section id="testimonials">
-                <h2 class="section-title">Comunidade Bro's</h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"Melhor pizza da região! O combo de 2 pizzas salvou a noite da galera. Chegou quentinha e muito recheada."</p>
-                        <p class="testimonial-author">Ricardo Silva</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"O Cheddar Bacon deles é surreal. Carne no ponto certo e o pão é muito macio. Virei cliente fiel!"</p>
-                        <p class="testimonial-author">Amanda Oliveira</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"Atendimento pelo site muito rápido e o entregador foi super educado. A pizza de chocolate é a melhor sobremesa."</p>
-                        <p class="testimonial-author">Lucas Mendes</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"O Chicken Crispy é crocante de verdade! O molho de ervas dá um toque especial que não vi em outro lugar."</p>
-                        <p class="testimonial-author">Mariana Costa</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"Sempre peço a pizza Quatro Queijos. Dá para sentir a qualidade do provolone e do gorgonzola. Perfeita!"</p>
-                        <p class="testimonial-author">João Paulo</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"Gostei muito do sistema de CEP do site. Calculou o frete na hora e o pedido chegou antes do prazo previsto."</p>
-                        <p class="testimonial-author">Beatriz Santos</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"O Smash Salada é o melhor custo-benefício. Carne suculenta, ingredientes frescos e o preço é top."</p>
-                        <p class="testimonial-author">Pedro Henrique</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testimonial-text">"Pedi para uma festa em casa e todos elogiaram. A massa é fina e a borda é crocante. Recomendo o Double BBQ!"</p>
-                        <p class="testimonial-author">Carla Ferreira</p>
+                <h2 class="section-title">A Nossa Comunidade</h2>
+                <div class="testimonials-slider-container">
+                    <div class="testimonials-track" id="testimonials-track">
+                        <!-- 10 DEPOIMENTOS HUMANIZADOS (SUPER MINI QUADRADOS - 2 LINHAS) -->
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Bro's é outro nível. Burger quentinho e brioche nuvem!"</p>
+                            <p class="testimonial-author">Ricardo Silva</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Pizza 4 Queijos impecável. Catupiry de verdade e massa fina."</p>
+                            <p class="testimonial-author">Amanda Oliveira</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Suporte pelo WhatsApp resolveu tudo. Atendimento 10!"</p>
+                            <p class="testimonial-author">Lucas Mendes</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Melhor custo-benefício. Batata crocante é raro em delivery."</p>
+                            <p class="testimonial-author">Juliana Costa</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Fã da Portuguesa. Muita cobertura e massa super leve."</p>
+                            <p class="testimonial-author">Marcos Santos</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Entrega rápida, 25 min e estava tudo fresco em casa."</p>
+                            <p class="testimonial-author">Bia Ferreira</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Combo 2 pizzas serviu 5 pessoas. Qualidade nota mil!"</p>
+                            <p class="testimonial-author">Fernando Souza</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Classic Burger suculento. Não troco por nada!"</p>
+                            <p class="testimonial-author">Carla Lima</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Sem miséria no recheio. Vale cada cêntimo investido!"</p>
+                            <p class="testimonial-author">Paulo Rocha</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="testimonial-text">"Apresentação linda e muito carinho na montagem. Perfeito!"</p>
+                            <p class="testimonial-author">Sofia Martins</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="faq">
-                <h2 class="section-title">Dúvidas</h2>
+                <h2 class="section-title">Dúvidas Frequentes</h2>
                 <div class="faq-container">
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Qual o tempo médio de entrega? <i class="fas fa-chevron-down"></i></button>
-                        <div class="faq-answer">Nosso tempo médio de entrega varia entre 35 a 50 minutos, dependendo da sua localização e do volume de pedidos no momento.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Qual o tempo médio de espera para entrega? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer">Nosso tempo médio de entrega varia entre 35 a 50 minutos, dependendo da sua localização e da demanda da cozinha. Cada pedido é feito na hora para garantir o frescor!</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Quais as formas de pagamento? <i class="fas fa-chevron-down"></i></button>
-                        <div class="faq-answer">Aceitamos cartões de crédito e débito (Mastercard, Visa, Elo), Pix e pagamento em dinheiro diretamente ao entregador.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Quais as formas de pagamento aceites? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer">Aceitamos PIX direto pelo site (com confirmação rápida), Cartão de Crédito/Débito e Dinheiro no momento da entrega. Você escolhe o que for mais prático no checkout.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Os hambúrgueres são artesanais? <i class="fas fa-chevron-down"></i></button>
-                        <div class="faq-answer">Sim! Todos os nossos blends são preparados diariamente com carne fresca, sem conservantes, e grelhados no fogo para garantir o sabor defumado.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Vocês têm opções para vegetarianos? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer">Sim! Temos a nossa Pizza Vegetariana com ingredientes selecionados e podemos adaptar alguns burgers com blend de grão-de-bico sob consulta prévia no WhatsApp.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Vocês fazem entregas em toda a cidade? <i class="fas fa-chevron-down"></i></button>
-                        <div class="faq-answer">Atendemos um raio de até 10km da nossa unidade central. Você pode conferir a disponibilidade digitando seu CEP no carrinho.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Como funciona a taxa de entrega? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer">Trabalhamos com uma taxa fixa reduzida para a maioria dos bairros vizinhos. Nas nossas Promoções do Dia, a entrega é totalmente GRÁTIS! Coloque o seu CEP no checkout para conferir.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Posso retirar o pedido no local? <i class="fas fa-chevron-down"></i></button>
-                        <div class="faq-answer">Com certeza! Basta selecionar a opção de retirada ao finalizar seu pedido e economizar no frete.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Posso agendar um pedido para mais tarde? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer">Com certeza! Para agendamentos, recomendamos que entre em contacto direto pelo nosso botão de WhatsApp. Assim, garantimos que o seu pedido saia no horário exato desejado.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">O Bro's possui opções vegetarianas? <i class="fas fa-chevron-down"></i></button>
-                        <div class="faq-answer">Sim, temos o Veggie Burger (grão de bico) e várias opções de pizzas vegetarianas como Margherita e Quatro Queijos.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Os hambúrgueres são feitos de carne fresca? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer">Sim! Utilizamos um blend exclusivo de carnes selecionadas que nunca são congeladas. Moemos a nossa carne diariamente para garantir a máxima suculência e sabor.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Como funciona a promoção de frete grátis? <i class="fas fa-chevron-down"></i></button>
-                        <div class="faq-answer">Pedidos que incluam qualquer item da seção "Combos & Promoções" garantem entrega grátis automaticamente para áreas selecionadas.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Tenho alergia alimentar. Como procedo? <i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer">A sua segurança é prioritária. Por favor, informe qualquer alergia (glúten, lactose, amendoim, etc.) no campo de observações do checkout ou avise-nos via WhatsApp antes de finalizar.</div>
                     </div>
                 </div>
             </section>
@@ -725,6 +738,10 @@
                         <input type="text" id="receiver-name" placeholder="Nome completo">
                     </div>
                     <div class="form-group" style="margin-top: 20px;">
+                        <label>Telemóvel / WhatsApp</label>
+                        <input type="tel" id="receiver-phone" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
                         <label>CEP</label>
                         <div style="display: flex; gap: 10px;">
                             <input type="text" id="cep-input" placeholder="00000-000">
@@ -743,7 +760,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Complemento</label>
-                                <input type="text" id="address-complement">
+                                <input type="text" id="address-complement" placeholder="Ex: Apto 12">
                             </div>
                         </div>
                         <p id="freight-text" style="color: #fff; font-weight: 800; margin-top: 15px; text-transform: uppercase;"></p>
@@ -759,7 +776,7 @@
                             <span id="final-total">R$ 0,00</span>
                         </div>
                         <button class="btn-finalize" style="margin-top: 30px;" onclick="irPagamento()">
-                            <i class="fas fa-check-circle"></i> CONFIRMAR PEDIDO.
+                            <i class="fas fa-check-circle"></i> CONFIRMAR PEDIDO
                         </button>
                     </div>
                 </div>
@@ -791,21 +808,18 @@
         const products = [
             { id: 107, type: 'promotion', name: '2 Pizzas de Calabresa (G) + Refrigerante 2L', desc: 'Duas pizzas tradicionais (G) + refrigerante 2L.', price: 39.90, img: 'promoção1.png' },
             { id: 102, type: 'promotion', name: 'Combo Individual Burger', desc: 'Burger Cheddar Bacon + Batata Frita + Refrigerante Lata', price: 29.90, img: 'promoção2.png' },
-
             { id: 1, type: 'pizza', name: 'MARGHERITA', desc: 'Mussarela, molho de tomate, rodelas de tomate e manjericão fresco.', price: 45.90, img: 'margherita.png' },
             { id: 5, type: 'pizza', name: 'QUATRO QUEIJOS', desc: 'Mussarela, cheddar, provolone e catupiry cremoso.', price: 49.90, img: '4queijo.png' },
             { id: 7, type: 'pizza', name: 'FRANGO COM CATUPIRY', desc: 'Frango desfiado temperado e catupiry cremoso.', price: 49.90, img: 'frango.png' },
             { id: 8, type: 'pizza', name: 'PORTUGUESA', desc: 'Presunto, mussarela, ovo, cebola, pimentão e azeitonas.', price: 42.00, img: 'portuguesa.png' },
             { id: 2, type: 'pizza', name: 'BACON CHEDDAR', desc: 'Mussarela, bacon crocante em cubos e cheddar cremoso.', price: 52.00, img: 'bacon.png' },
             { id: 3, type: 'pizza', name: 'VEGETARIANA', desc: 'Mussarela, champignon, cebola roxa, pimentão, tomate e azeitonas.', price: 48.50, img: 'vegetariana.png' },
-            
             { id: 10, type: 'burger', name: 'CLASSIC BURGER', desc: 'Hambúrguer artesanal, queijo mussarela, alface, tomate e maionese da casa.', price: 35.00, img: 'clasico.png' },
             { id: 11, type: 'burger', name: 'CHEDDAR BACON', desc: 'Hambúrguer artesanal, cheddar cremoso, bacon crocante e pão brioche.', price: 39.00, img: 'chedder.png' },
             { id: 12, type: 'burger', name: 'DUPLO CHEDDAR', desc: 'Dois hambúrgueres, dobro de cheddar, cebola caramelizada e pão brioche.', price: 42.00, img: 'duplo.png' },
             { id: 13, type: 'burger', name: 'BARBECUE BURGER', desc: 'Hambúrguer artesanal, cheddar, bacon, cebola caramelizada e molho barbecue.', price: 38.00, img: 'barbecue.png' },
             { id: 14, type: 'burger', name: 'SALADA ESPECIAL', desc: 'Hambúrguer artesanal, mussarela, alface, tomate, cebola roxa e molho especial.', price: 37.00, img: 'salada.png' },
             { id: 15, type: 'burger', name: 'FRANGO CROCANT', desc: 'Filé de frango empanado, queijo prato, alface, tomate e maionese.', price: 46.50, img: 'frango2.png' },
-
             { id: 20, type: 'drink', name: 'Coca-Cola', desc: 'Refrigerante gelado, refrescante e tradicional.', price: 6.50, img: 'coca.png' },
             { id: 21, type: 'drink', name: 'GUARANÁ ANTARCTICA ', desc: '350ml gelada', price: 6.00, img: 'guarana.png' },
             { id: 22, type: 'drink', name: 'FANTA LARANJA', desc: 'Refrigerante gelado com sabor intenso de laranja.', price: 12.00, img: 'fanta.png' },
@@ -817,7 +831,10 @@
         let freightValue = 0;
         let isAddressCalculated = false;
 
-        window.onload = () => { renderProducts(); };
+        window.onload = () => { 
+            renderProducts(); 
+            startTestimonialsAutoScroll();
+        };
 
         function showNotification(message) {
             const box = document.getElementById('notification-box');
@@ -833,9 +850,7 @@
                 burger: document.getElementById('burger-container'),
                 drink: document.getElementById('drink-container')
             };
-
             Object.values(containers).forEach(c => c.innerHTML = '');
-
             products.forEach(p => {
                 const card = `
                     <div class="card">
@@ -864,6 +879,27 @@
         function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
         function toggleFaq(button) { button.parentElement.classList.toggle('active'); }
 
+        // --- LÓGICA DO CARROSSEL AUTOMÁTICO (SUPER MINI QUADRADOS) ---
+        let testimonialIndex = 0;
+        function startTestimonialsAutoScroll() {
+            const track = document.getElementById('testimonials-track');
+            const cards = track.children;
+            const totalItems = cards.length;
+            
+            setInterval(() => {
+                // Ajustado para mostrar 6 em desktop, 3 em tablet, 2 em mobile
+                const itemsToShow = window.innerWidth > 1024 ? 6 : (window.innerWidth > 768 ? 3 : 2);
+                testimonialIndex++;
+                
+                if (testimonialIndex > totalItems - itemsToShow) {
+                    testimonialIndex = 0;
+                }
+                
+                const cardWidth = cards[0].offsetWidth + 15; // width + gap
+                track.style.transform = `translateX(-${testimonialIndex * cardWidth}px)`;
+            }, 4000); 
+        }
+
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             if (product.type !== 'drink' && cart.length > 0) {
@@ -876,7 +912,6 @@
                     showNotification("Remova itens normais para adicionar promoção."); return;
                 }
             }
-
             const itemInCart = cart.find(item => item.id === id);
             itemInCart ? itemInCart.qty++ : cart.push({ ...product, qty: 1 });
             updateCartUI();
@@ -895,23 +930,18 @@
             const totalLabel = document.getElementById('cart-total-value');
             container.innerHTML = '';
             let total = 0; let itemsCount = 0;
-
             cart.forEach(item => {
                 total += item.price * item.qty;
                 itemsCount += item.qty;
                 container.innerHTML += `
                     <div class="cart-item">
-                        <div>
-                            <h4 style="font-size: 0.9rem;">${item.name}</h4>
-                            <p style="font-weight: 700; color: #fff;">R$ ${(item.price * item.qty).toFixed(2)}</p>
-                        </div>
+                        <div><h4 style="font-size: 0.9rem;">${item.name}</h4><p style="font-weight: 700; color: #fff;">R$ ${(item.price * item.qty).toFixed(2)}</p></div>
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
                             <span>${item.qty}</span>
                             <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
             countLabel.innerText = itemsCount;
             totalLabel.innerText = `R$ ${total.toFixed(2)}`;
@@ -948,15 +978,12 @@
                 const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
                 const data = await response.json();
                 if(data.erro) return showNotification("CEP não encontrado");
-
                 document.getElementById('address-info').style.display = 'block';
                 document.getElementById('address-text').innerText = `${data.logradouro}, ${data.bairro} - ${data.localidade}/${data.uf}`;
-                
                 const hasPromo = cart.some(item => item.type === 'promotion');
-                freightValue = hasPromo ? 0 : 8.50; // Valor fixo simulado
+                freightValue = hasPromo ? 0 : 8.50;
                 document.getElementById('freight-text').innerText = hasPromo ? "ENTREGA GRÁTIS!" : `ENTREGA: R$ ${freightValue.toFixed(2)}`;
                 document.getElementById('final-freight').innerText = hasPromo ? "GRÁTIS" : `R$ ${freightValue.toFixed(2)}`;
-                
                 isAddressCalculated = true;
                 updateFinalTotal(cart.reduce((a, b) => a + (b.price * b.qty), 0));
             } catch (e) { console.error(e); }
@@ -966,14 +993,63 @@
             document.getElementById('final-total').innerText = `R$ ${(subtotal + freightValue).toFixed(2)}`;
         }
 
+        // --- LÓGICA DE PAGAMENTO PIX ---
+        function startPixTimer() {
+            let duration = 5 * 60;
+            const display = document.getElementById('pix-timer');
+            const interval = setInterval(() => {
+                let minutes = Math.floor(duration / 60);
+                let seconds = duration % 60;
+                display.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (--duration < 0) {
+                    clearInterval(interval);
+                    display.innerText = "EXPIRADO";
+                }
+            }, 1000);
+        }
+
+        function generateRandomPix() {
+            const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let key = '00020126580014BR.GOV.BCB.PIX0136';
+            for (let i = 0; i < 32; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
+            return key;
+        }
+
         function irPagamento() {
-            if(!document.getElementById('receiver-name').value || !isAddressCalculated || !document.getElementById('address-number').value) {
+            const name = document.getElementById('receiver-name').value;
+            const phone = document.getElementById('receiver-phone').value;
+            const number = document.getElementById('address-number').value;
+            const address = document.getElementById('address-text').innerText;
+            const complement = document.getElementById('address-complement').value;
+
+            if(!name || !phone || !isAddressCalculated || !number) {
                 return showNotification("Preencha todos os dados!");
             }
-            window.location.href = "https://seguropagamentos.com.br/BrosBurguePizza";
+
+            document.getElementById('pix-modal-overlay').style.display = 'flex';
+            document.getElementById('pix-loading').style.display = 'flex';
+            document.getElementById('pix-main-content').style.display = 'none';
+
+            setTimeout(() => {
+                document.getElementById('pix-loading').style.display = 'none';
+                const mainContent = document.getElementById('pix-main-content');
+                mainContent.style.display = 'block';
+
+                document.getElementById('pix-client-name').innerText = name;
+                document.getElementById('pix-client-phone').innerText = phone;
+                document.getElementById('pix-client-address').innerText = `${address}, nº ${number} ${complement ? '('+complement+')' : ''}`;
+                document.getElementById('pix-final-value').innerText = document.getElementById('final-total').innerText;
+                document.getElementById('pix-key-value').innerText = generateRandomPix();
+
+                const itemsList = document.getElementById('pix-items-list');
+                itemsList.innerHTML = '';
+                cart.forEach(item => {
+                    itemsList.innerHTML += `<p style="font-size: 0.8rem; color: var(--text-dim);">${item.qty}x ${item.name}</p>`;
+                });
+
+                startPixTimer();
+            }, 3000); 
         }
     </script>
 </body>
 </html>
-
-
