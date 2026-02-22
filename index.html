@@ -225,7 +225,7 @@
       transform: translateY(-1px);
     }
 
-    /* Ajuste específico para o bloco de Promoções (ALTERAÇÃO SOLICITADA) */
+    /* Ajuste para o bloco de Promoções (Desktop e Mobile) */
     #promotions .nav-btn { display: none; }
     #promotions .carousel-container { justify-content: center; overflow-x: visible; }
 
@@ -732,10 +732,23 @@
       .hero-banner{ max-height: 380px; }
       .section-title{ font-size: 1.35rem; }
       .nav-btn{ display:none; }
+      
+      /* Configuração Geral de Carrossel Mobile */
       .carousel-container{ overflow-x: auto; scroll-snap-type: x mandatory; }
-      /* No mobile, voltamos ao alinhamento inicial para permitir scroll caso necessário */
-      #promotions .carousel-container { justify-content: flex-start; } 
       .card{ min-width: 82%; scroll-snap-align: start; }
+
+      /* AJUSTE ESPECÍFICO SOLICITADO PARA O BLOCO DE PROMOÇÕES NO MOBILE */
+      #promotions .carousel-container { 
+        flex-direction: column; 
+        align-items: center; 
+        overflow-x: visible; 
+        gap: 22px;
+      }
+      #promotions .card { 
+        min-width: 100%; 
+        scroll-snap-align: none;
+      }
+
       .testimonial-card{ min-width: calc(48% - 8px); }
       .card-img-wrapper{ height: 255px; }
       #pizza-container .card-img-wrapper{ height: 320px; }
@@ -838,7 +851,7 @@
         <!-- Apenas visual (não mexe na lógica) -->
         <div class="header-badges">
           <div class="badge"><i class="fa-solid fa-bolt"></i> Pedido rápido</div>
-          <div class="badge"><i class="fa-solid fa-shield-heart"></i> Pagamento seguro</div>
+          <div class="badge"><i class="fa-solid fa-shield-heart"></i> Pagamento segura</div>
           <div class="badge"><i class="fa-solid fa-star"></i> Avaliação 5.0</div>
         </div>
       </div>
@@ -892,7 +905,7 @@
 
       <section id="testimonials">
         <h2 class="section-title">A Nossa Comunidade</h2>
-        <p class="section-sub">Gente real, pedidos reais — o que mais falam quando a entrega chega.</p>
+        <p class="section-sub">Gente real, pedidos reais o que mais falam quando a entrega chega.</p>
         <div class="testimonials-slider-container">
           <div class="testimonials-track" id="testimonials-track">
             <!-- (Seu conteúdo original mantido) -->
@@ -1162,7 +1175,7 @@
     function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
     function toggleFaq(button) { button.parentElement.classList.toggle('active'); }
 
-    // --- LÓGICA DO CARROSSEL AUTOMÁTICO (SUPER MINI QUADRADOS) ---
+    // --- LÓGICA DO CARROSSEL AUTOMÁTICO ---
     let testimonialIndex = 0;
     function startTestimonialsAutoScroll() {
       const track = document.getElementById('testimonials-track');
@@ -1182,7 +1195,7 @@
       }, 4000);
     }
 
-    // --- LÓGICA DE SABORES (ALTERAÇÃO SOLICITADA) ---
+    // --- LÓGICA DE SABORES ---
     function closeFlavorModal() {
       document.getElementById('flavor-modal-overlay').style.display = 'none';
       pendingPromotion = null;
@@ -1191,13 +1204,11 @@
     function confirmFlavor(flavorName) {
       if(!pendingPromotion) return;
       
-      // Cria uma cópia do produto com o nome do sabor selecionado
       const productWithFlavor = { 
         ...pendingPromotion, 
         name: flavorName 
       };
 
-      // Executa a lógica de adição ao carrinho (mesma do addToCart original)
       if (cart.length > 0) {
         const hasPromotion = cart.some(item => item.type === 'promotion');
         const hasNormal = cart.some(item => item.type !== 'promotion' && item.type !== 'drink');
@@ -1223,7 +1234,6 @@
     function addToCart(id) {
       const product = products.find(p => p.id === id);
       
-      // Se for a promoção de pizza, abre o seletor de sabores
       if (id === 107) {
         pendingPromotion = product;
         document.getElementById('flavor-modal-overlay').style.display = 'flex';
@@ -1380,5 +1390,3 @@
 
 </body>
 </html>
-
-
